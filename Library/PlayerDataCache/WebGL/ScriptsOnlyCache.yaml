@@ -1,7 +1,9 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AspectRatioScaler
     - FPSController
+    - PopupManager
     Unity.ProBuilder.Editor.dll:
     - UnityEditor.ProBuilder.ProBuilderEditor
     Unity.Rider.Editor.dll:
@@ -17,10 +19,18 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshPro
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
   serializedClasses:
     Unity.TextMeshPro:
     - TMPro.FaceInfo_Legacy
@@ -38,15 +48,40 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Style
     - TMPro.VertexGradient
     UnityEngine.CoreModule:
+    - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
+    - UnityEngine.Events.PersistentListenerMode
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
     - UnityEngine.TextCore.GlyphMetrics
     - UnityEngine.TextCore.GlyphRect
     UnityEngine.UI:
+    - UnityEngine.UI.AnimationTriggers
+    - UnityEngine.UI.Button/ButtonClickedEvent
+    - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
-  methodsToPreserve: []
+    - UnityEngine.UI.Navigation
+    - UnityEngine.UI.SpriteState
+  methodsToPreserve:
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ClosePopup
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ClosePopup
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ShowPopup
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ClosePopup
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ShowPopup
+  - assembly: Assembly-CSharp
+    fullTypeName: PopupManager
+    methodName: ShowPopup
   sceneClasses:
     Assets/vrproject.unity:
     - Class: 1
@@ -82,9 +117,17 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1702}
+    - Class: 114
       Script: {instanceID: 2356}
     - Class: 114
+      Script: {instanceID: 2820}
+    - Class: 114
       Script: {instanceID: 2888}
+    - Class: 114
+      Script: {instanceID: 3048}
+    - Class: 114
+      Script: {instanceID: 3382}
     - Class: 114
       Script: {instanceID: 3854}
     - Class: 114
@@ -93,6 +136,16 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4764}
     - Class: 114
       Script: {instanceID: 5560}
+    - Class: 114
+      Script: {instanceID: 5586}
+    - Class: 114
+      Script: {instanceID: 6186}
+    - Class: 114
+      Script: {instanceID: 6352}
+    - Class: 114
+      Script: {instanceID: 6714}
+    - Class: 114
+      Script: {instanceID: 8058}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -104,6 +157,12 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
@@ -742,6 +801,12 @@ ScriptsOnlyBuild:
     className: Vignette
   - hash:
       serializedVersion: 2
+      Hash: 671cc118ca5d1bb01cca23b62077cfc0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PopupManager
+  - hash:
+      serializedVersion: 2
       Hash: c65fb8f721cc4462e7a642974c37d3c0
     assemblyName: Unity.Postprocessing.Runtime
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -1010,6 +1075,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: 8c3fce7667c348a403e5d4f9fcc2c228
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: AspectRatioScaler
   - hash:
       serializedVersion: 2
       Hash: 9a174471d4db2c0c6d3ac47d2f818db1

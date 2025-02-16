@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-
 public class FPSController : MonoBehaviour
 {
     public Camera playerCamera;
@@ -11,41 +10,52 @@ public class FPSController : MonoBehaviour
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
- 
- 
+
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
- 
- 
+
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-      public bool canMove = true;
- 
-    
+    public bool canMove = true;
+
     CharacterController characterController;
+
+    // New flag to check if the mouse button is held
+    private bool isMouseClicked = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
-       void Update()
+
+    void Update()
     {
- 
-        #region Handles Movment
+        // Check if the left mouse button is clicked and held
+        if (Input.GetMouseButton(0))
+        {
+            isMouseClicked = true;
+        }
+        else
+        {
+            isMouseClicked = false;
+        }
+
+        #region Handles Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
- 
+
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
- 
+
         #endregion
- 
+
         #region Handles Jumping
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
@@ -55,25 +65,26 @@ public class FPSController : MonoBehaviour
         {
             moveDirection.y = movementDirectionY;
         }
- 
+
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
- 
+
         #endregion
- 
+
         #region Handles Rotation
         characterController.Move(moveDirection * Time.deltaTime);
- 
-        if (canMove)
+
+        // Only allow rotation if the mouse button is clicked
+        if (canMove && isMouseClicked)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
- 
+
         #endregion
     }
 }
